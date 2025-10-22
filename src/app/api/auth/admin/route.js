@@ -47,7 +47,7 @@ export async function POST(req) {
         `
         await queryDatabase(insertQry);
 
-        // if the newly registered user is a doctor we must add him into the DOCTOR_MST
+        // if the newly registered user is a doctor or a nurse we must add him into the DOCTOR_MST or NURSE_MST
         if (role === 'D') {
             const DoctorCountResult = await queryDatabase(`SELECT * FROM [oulmsHospital].[dbo].[DOCTOR_MST]`);
             const DoctorCount = DoctorCountResult.length;
@@ -73,6 +73,30 @@ export async function POST(req) {
                 )
             `
             await queryDatabase(insertDoctorTable);
+        } else if (role === 'N') {
+            const NurseCountResult = await queryDatabase(`SELECT * FROM [oulmsHospital].[dbo].[NURSE_MST]`);
+            const NurseCount = NurseCountResult.length;
+            let NurseID;
+            if (NurseCount === 0) {
+                NurseID = `NRS${String(NurseCount + 1).padStart(5, '0')}`;
+            } else {
+                const LastNurse = await queryDatabase(`SELECT RIGHT(MAX([NurseID]), 5) FROM [oulmsHospital].[dbo].[NURSE_MST]`);
+                const LastNurseIdNumber = parseInt(LastNurse[0]['']) + 1;
+                NurseID = `NRS${String(LastNurseIdNumber).padStart(5, '0')}`;
+            }
+
+            const insertNurseTable = `
+                INSERT INTO [oulmsHospital].[dbo].[NURSE_MST]
+                    ([NurseID]
+                    ,[UserID]
+                    )
+                VALUES (
+                    '${NurseID}',
+                    '${newUserId}'
+                )
+            `
+
+            await queryDatabase(insertNurseTable);
         }
         return NextResponse.json({ success: true, message: 'done' });
 
