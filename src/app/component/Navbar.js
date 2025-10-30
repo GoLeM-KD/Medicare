@@ -57,11 +57,11 @@ export default function navbar() {
         <span className="logo">MEDICARE</span>
         <nav className="nav-container">
         <ul>
-            <li href="#aboutus" className="hideOnMobile"><a>About us</a></li>
-            <li href="#channeling" className="hideOnMobile"><a>Channeling</a></li>
-            <li href="#reports" className="hideOnMobile"><a>Reports</a></li>
-            <li href="#contact" className="hideOnMobile"><a>Contact Us</a></li>
-            <li href="ambulance"><a>
+            <li  className="hideOnMobile"><a href="#aboutus">About us</a></li>
+            <li  className="hideOnMobile"><a href="#channeling">Channeling</a></li>
+            <li  className="hideOnMobile"><a href="#reports">Reports</a></li>
+            <li  className="hideOnMobile"><a href="#contact">Contact Us</a></li>
+            <li ><a href="ambulance">
                 <Image src={icons8Ambulance501} width={48} height={48} alt="ambulanceIcon" className="ambulance-Icon"/>
                 </a></li>
             <li><a href="account">
