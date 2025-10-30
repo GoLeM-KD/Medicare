@@ -1,16 +1,18 @@
 "use client";
 import React, { useEffect, useState, use } from "react";
 
-
 export default function Page({ params }) {
   const resolvedParams = use(params);
   const doctorID = resolvedParams.DoctorID;
 
   const [choosedDoctor, setChoosedDoctor] = useState([]); // Holding all datas of the choosed Docotor
   const [name, setName] = useState(""); // Holding Name Input Value
-  const [dateAndTime, setDateAndTime] = useState(''); // Holding Date and Time Input Value
+  const [dateAndTime, setDateAndTime] = useState(""); // Holding Date and Time Input Value
   const [reason, setReason] = useState(""); // Holding Reason Textarea Value
   const [tokenR, setTocken] = useState(""); // Holding User Token Value
+
+  // Handeling the Laoding screen
+  const [isAppointmentLoading, setAppointmentLoading] = useState(false); // appointment loading state
 
   useEffect(() => {
     const fetchDoctorDetails = async () => {
@@ -18,10 +20,10 @@ export default function Page({ params }) {
         `/api/user/getDoctor/getDoctorDetails?DoctorID=${doctorID}`
       );
       const tokenRes = await fetch("/api/token");
-      
+
       const TokenData = await tokenRes.json();
       const data = await res.json();
-     
+
       setChoosedDoctor(data);
       setTocken(TokenData.token);
 
@@ -37,7 +39,7 @@ export default function Page({ params }) {
         we have stored the userID in the token cookie
         then we can get the UserID from there
     */
-
+    setAppointmentLoading(true);
     const formData = new FormData();
     formData.append("Pname", name);
     formData.append("dateAndTime", dateAndTime);
@@ -60,6 +62,7 @@ export default function Page({ params }) {
     } else {
       alert("Failed to submit appointment");
     }
+    setAppointmentLoading(false);
   };
 
   return (
@@ -100,13 +103,19 @@ export default function Page({ params }) {
           className="border-1 border-black"
         />
 
-        <button
-          type="button"
-          onClick={handleSubmitAppointment}
-          className="border-1 border-black bg-[#88b5ba] hover:cursor-pointer pl-[10px] pr-[10px]"
-        >
-          Place the Appointment
-        </button>
+        {isAppointmentLoading ? (
+          <button className="border-1 border-black bg-[#88b5ba] hover:cursor-pointer pl-[10px] pr-[10px]">
+            Placing...
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={handleSubmitAppointment}
+            className="border-1 border-black bg-[#88b5ba] hover:cursor-pointer pl-[10px] pr-[10px]"
+          >
+            Place the Appointment
+          </button>
+        )}
       </form>
     </div>
   );

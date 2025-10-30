@@ -17,9 +17,14 @@ export default function page() {
     
     const [err, setErr] = useState(false);
 
+    // Handdeling Loading screens
+    const [isLoading, setLoading] = useState(false);
+
     const router = useRouter();
 
     const handleRegister = async () => {
+
+        setLoading(true);
 
         if (!firstName || !lastName || !username || !email || !pwd || !cpwd) {
             setErr("All fields are required");
@@ -51,7 +56,7 @@ export default function page() {
         }
 
 
-
+        setLoading(false);
     }
 
   return (
