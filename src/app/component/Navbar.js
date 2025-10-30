@@ -28,7 +28,7 @@ export default function navbar() {
     { label: "Contact Us", left: "71.61%", width: "4.74%", link: "User/#" },
   ];
 
-  // Log out function
+  // Log-out function
   async function logout() {
     await fetch("../api/auth/logout", { method: "POST" });
     window.location.href = "/auth/Login";
