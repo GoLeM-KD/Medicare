@@ -10,30 +10,29 @@ const poppa = Poppins({
 
 export default async function DoctorLayout({children}) {
 
-    const token = cookies().get('token')?.value
+  const cookieStore = await cookies();
+  const token = cookieStore.get('token')?.value;
 
-    if (!token) {
-    redirect('/auth/Login')
-    }
+  if (!token) {
+  redirect('/auth/Login')
+  }
 
-    const userRoleQuery = `
-    SELECT [Role]
-    FROM [dbo].[USER_MST]
-    WHERE [UserId] = '${token}'
-    `
-    const userRoleResult = await queryDatabase(userRoleQuery)
+  const userRoleQuery = `
+  SELECT [Role]
+  FROM [dbo].[USER_MST]
+  WHERE [UserId] = '${token}'
+  `
+  const userRoleResult = await queryDatabase(userRoleQuery)
 
-    if (userRoleResult[0]?.Role !== 'D') {
-    redirect('/')
-    }
+  if (userRoleResult[0]?.Role !== 'D') {
+  redirect('/')
+  }
 
   return (
-    <html lang="en">
-      <body
+      <div
         className={poppa.className}
       >
         {children}
-      </body>
-    </html>
+      </div>
   );
 }

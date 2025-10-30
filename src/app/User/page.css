@@ -1,0 +1,16 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.cover_page {
+  position: relative;
+  z-index: 1;
+
+}
+
+.page_contents {
+  padding-top: 691px;
+  position: relative;
+  z-index: 1;
+
+}

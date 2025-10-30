@@ -1,16 +1,21 @@
-import { redirect } from 'next/navigation'
-import { queryDatabase } from '../db'
-import { cookies } from 'next/headers'
-import Link from 'next/link'
+"use client";
+import React from "react";
+import "./page.css";
+import CoverPage from "./component/CoverPage";
+import AboutUsSection from "./component/About";
+import HealthEducationSection from "./component/HealthEducation";
 
-export default async function page() {
 
 
+export default function page() {
   return (
-    <div className='flex flex-col gap-[10px]'>
-      USERS Dashboard
+    <div>
+      <CoverPage className="cover_page" />
+      <div className="page_contents">
+        <AboutUsSection />
+        <HealthEducationSection />
 
-      <Link href="/User/BookADoctor">Book a Doctor</Link>
+      </div>
     </div>
-  )
+  );
 }

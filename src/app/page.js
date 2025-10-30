@@ -1,31 +1,34 @@
-// SERVER COMPONENT (no 'use client')
-import { cookies } from 'next/headers'
-import {queryDatabase} from './db'
+'use client'
+import React, { useEffect, useState } from 'react'
+import { useRouter } from "next/navigation";
 
-// dashboards
-import UserDashboard from './User/page'
-import AdminDashboard from './Admin/page'
-import DoctorDashboard from './Doctor/page'
+export default function DashboardPage() {
+  const router = useRouter();
+  const [role, setRole] = useState('');
 
-export default async function DashboardPage() {
-  const cookieStore = cookies()
-  const token = cookieStore.get('token')?.value || 'No token'
+  useEffect(() => {
+    const fetchRole = async () => {
+      const response = await fetch('/api/token/checkToken');
+      const data = await response.json();
+      setRole(data.role);
+    };
+    fetchRole();
+  }, []);
 
-  const userRoleQuery = `SELECT [Role]
-      FROM [dbo].[USER_MST]
-      WHERE [UserId] = '${token}'
-      `
-  const userRoleResult = await queryDatabase(userRoleQuery);
+  
+  useEffect(() => {
+    if (role === "A") {
+      router.push("/Admin");
+    } else if (role === "P") {
+      router.push("/User");
+    } else if (role === "D") {
+      router.push("/Doctor");
+    }
+  }, [role, router]);
 
-  if(userRoleResult[0].Role ===  'A'){
-    return <AdminDashboard token={token} />
-  } else if (userRoleResult[0].Role === 'P') {
-    return <UserDashboard token={token} />
-  } else if (userRoleResult[0].Role === 'D') {
-    return <DoctorDashboard token={token}/>
-  }
-
-
-  // Pass it down to a client component
- 
+  return (
+    <div className="flex flex-col items-center justify-center h-screen">
+      <p>Entering...</p>
+    </div>
+  );
 }
