@@ -1,31 +1,26 @@
-// SERVER COMPONENT (no 'use client')
-import { cookies } from 'next/headers'
-import {queryDatabase} from './db'
-
-// dashboards
-import UserDashboard from './User/page'
-import AdminDashboard from './Admin/page'
-import DoctorDashboard from './Doctor/page'
-
-export default async function DashboardPage() {
-  const cookieStore = cookies()
-  const token = cookieStore.get('token')?.value || 'No token'
-
-  const userRoleQuery = `SELECT [Role]
-      FROM [dbo].[USER_MST]
-      WHERE [UserId] = '${token}'
-      `
-  const userRoleResult = await queryDatabase(userRoleQuery);
-
-  if(userRoleResult[0].Role ===  'A'){
-    return <AdminDashboard token={token} />
-  } else if (userRoleResult[0].Role === 'P') {
-    return <UserDashboard token={token} />
-  } else if (userRoleResult[0].Role === 'D') {
-    return <DoctorDashboard token={token}/>
-  }
+"use client";
+import React from "react";
+import "./page.css";
+import CoverPage from "./component/CoverPage";
+import AboutUsSection from "./component/About";
+import HealthEducationSection from "./component/HealthEducation";
 
 
-  // Pass it down to a client component
- 
+import FooterSection from "../compontents/Footer";
+
+import NavigationBarSection from "./component/Navbar";
+import ServicesSection from "./component/Service";
+
+
+export default function page() {
+  return (
+    <div>
+      <CoverPage className="cover_page" />
+      <div className="page_contents">
+        <AboutUsSection />
+        <HealthEducationSection />
+
+      </div>
+    </div>
+  );
 }

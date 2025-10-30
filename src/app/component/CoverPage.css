@@ -1,0 +1,15 @@
+.cover-page {
+  position: fixed;
+  width: 100%;
+  height: 691px;
+  left: 0px;
+  top: 50px;
+
+
+  background-image: url("../assets/GroupOfDoctors.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+
+}
