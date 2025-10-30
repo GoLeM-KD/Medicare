@@ -21,7 +21,7 @@ const contactInfoItems = [
   ];
 
   return (
-    <footer className="footer">
+    <footer className="footer" id='footer_section'>
       <div className="footer-container">
         <div className="desctption">
           <h2>MEDI CARE</h2>

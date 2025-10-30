@@ -15,7 +15,7 @@ export default function About() {
   };
 
   return (
-    <div className="card_background">
+    <div className="card_background" id='about'>
 
             <div className="card_container">
                 <div className="about_section">

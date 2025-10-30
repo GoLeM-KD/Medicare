@@ -39,7 +39,7 @@ export default function navbar() {
     const sidebar = document.querySelector('.sidebar');
     sidebar.style.display = 'flex';
     const hamBurgerButton = document.querySelector('.hamBurger');
-    hamBurgerButton.style.display = 'none';
+    hamBurgerButton.style.visibility = 'hidden';
   }
 
   //Sidebar hide function
@@ -47,7 +47,7 @@ export default function navbar() {
     const sidebar = document.querySelector('.sidebar');
     sidebar.style.display = 'none';
     const hamBurgerButton = document.querySelector('.hamBurger');
-    hamBurgerButton.style.display = 'block';
+    hamBurgerButton.style.visibility = 'visible';
   }
 
 
@@ -57,17 +57,17 @@ export default function navbar() {
         <span className="logo">MEDICARE</span>
         <nav className="nav-container">
         <ul>
-            <li  className="hideOnMobile"><a href="#aboutus">About us</a></li>
+            <li  className="hideOnMobile"><a href="#about">About us</a></li>
             <li  className="hideOnMobile"><a href="#channeling">Channeling</a></li>
             <li  className="hideOnMobile"><a href="#reports">Reports</a></li>
-            <li  className="hideOnMobile"><a href="#contact">Contact Us</a></li>
-            <li ><a href="ambulance">
+            <li  className="hideOnMobile"><a href="#footer_section">Contact Us</a></li>
+            <li className="hideOnMobile"><a href="ambulance">
                 <Image src={icons8Ambulance501} width={48} height={48} alt="ambulanceIcon" className="ambulance-Icon"/>
                 </a></li>
-            <li><a href="account">
+            <li className="hideOnMobile"><a href="account">
                 <Image src={icons8User501} width={48} height={48} alt="userIcon" className="user-Icon"/>
                 </a></li>
-            <li>
+            <li className="hideOnMobile">
               <a href="logout" onClick={logout}>
                 <Image src={icons8Logout501} width={48} height={48} alt="logoutIcon" className="logout-Icon"/>
               </a></li>
@@ -80,10 +80,21 @@ export default function navbar() {
           
           <ul className="sidebar" >
             <li><a href="#" onClick={hideSidebar}><svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#000000"><path d="m249-207-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"/></svg></a></li>
-            <li><a href="#aboutus">About us</a></li>
+            <li><a href="#about">About us</a></li>
             <li><a href="#channeling">Channeling</a></li>
             <li><a href="#reports">Reports</a></li>
-            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="#footer_section">Contact Us</a></li>
+            <li><a href="ambulance">
+                <Image src={icons8Ambulance501} width={48} height={48} alt="ambulanceIcon" className="ambulance-Icon"/>
+                </a></li>
+            <li><a href="account">
+                <Image src={icons8User501} width={48} height={48} alt="userIcon" className="user-Icon"/>
+                </a></li>
+            <li>
+              <a href="logout" onClick={logout}>
+                <Image src={icons8Logout501} width={48} height={48} alt="logoutIcon" className="logout-Icon"/>
+              </a></li>
+            
           </ul>
 
       </nav>
