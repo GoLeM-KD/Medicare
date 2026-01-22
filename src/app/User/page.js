@@ -8,11 +8,12 @@ import HealthEducationSection from "./component/HealthEducation";
 
 
 export default function page() {
+
   return (
     <div>
       <CoverPage className="cover_page" />
       <div className="page_contents">
-        <AboutUsSection />
+        <AboutUsSection id="about-us"/>
         <HealthEducationSection />
 
       </div>

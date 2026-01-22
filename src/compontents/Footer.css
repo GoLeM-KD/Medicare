@@ -4,7 +4,7 @@
   color: #FFFFFF;
   font-family: 'Segoe UI', sans-serif;
   position: relative;
-  z-index: 1000; /*ensures it stays above other elements*/
+  z-index: 50; /*ensures it stays above other elements*/
   padding-top: 20px;
   padding-bottom: 20px;
 

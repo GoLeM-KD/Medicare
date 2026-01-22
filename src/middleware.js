@@ -1,27 +1,56 @@
-// middleware.js
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
 
-export  function middleware(request) {
-  const token = request.cookies.get("token")?.value; // example: get from cookie
+export function middleware(request) {
+  const { pathname } = request.nextUrl;
+  const token = request.cookies.get('token')?.value;
+  const role = request.cookies.get('role')?.value;
 
-  // If no token, redirect to login
-  if (!token) {
-    return NextResponse.redirect(new URL("/auth/Login", request.url));
-    
+  const dashboard = {
+    A: '/Admin',
+    D: '/Doctor',
+    P: '/User',
+  }[role];
+
+  // Logged-in user visiting auth pages
+  if (pathname.startsWith('/auth') && token && role) {
+    return NextResponse.redirect(new URL(dashboard, request.url));
   }
 
-  // If token exists but user tries to access `/Invoice`
-  if (request.nextUrl.pathname.startsWith("/Invoice")) {
-    return NextResponse.redirect(new URL("/", request.url));
-    
+  // Allow auth pages for non-logged users
+  if (pathname.startsWith('/auth')) {
+    return NextResponse.next();
   }
 
-  
-  // Otherwise continue
+  // No auth
+  if (!token && !role) {
+    return NextResponse.redirect(new URL('/auth/Login', request.url));
+  }
+
+  // Invalid role
+  if (!dashboard) {
+    const res = NextResponse.redirect(new URL('/auth/Login', request.url));
+    res.cookies.delete('token');
+    res.cookies.delete('role');
+    return res;
+  }
+
+  // Role-based protection
+  if (
+    (role === 'A' && !pathname.startsWith('/Admin')) ||
+    (role === 'D' && !pathname.startsWith('/Doctor')) ||
+    (role === 'P' && !pathname.startsWith('/User'))
+  ) {
+    return NextResponse.redirect(new URL(dashboard, request.url));
+  }
+
   return NextResponse.next();
 }
 
-// Paths to apply this middleware
 export const config = {
-  matcher: [ "/Reports/:path*", "/", "/Admin/:path*", "/User/:path*", "/Doctor/:path*"], // adjust as needed
+  matcher: [
+    '/Admin/:path*',
+    '/Doctor/:path*',
+    '/User/:path*',
+    '/auth/:path*'
+  ],
 };

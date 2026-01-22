@@ -46,13 +46,12 @@ export default function page() {
         });
 
         const data = await res.json();
-        if (res.ok && (data.success == true)) {
-            alert('Member Registered Successfully');
-
-        } else if (data.message === 'U') {
-            alert('Username already exists');
-        } else if (data.message === 'E') {
-            alert('Email already exists');
+        if (res.ok && data.success == true) {
+        alert("Member Registered Successfully");
+        } else if (data.msg === "U") {
+        alert("Username already exists");
+        } else if (data.msg === "E") {
+        alert("Email already exists");
         }
 
 

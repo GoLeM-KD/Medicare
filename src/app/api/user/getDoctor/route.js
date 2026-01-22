@@ -18,6 +18,7 @@ export async function GET(req) {
                 ,D.[DcrDesc]
                 ,U.[FirstName]
                 ,U.[LastName]
+                ,U.[ImageURL]
             FROM [oulmsHospital].[dbo].[DOCTOR_MST] AS D
             INNER JOIN [oulmsHospital].[dbo].[USER_MST] AS U
             ON U.[UserId] = D.[UserID]
@@ -33,7 +34,7 @@ export async function GET(req) {
         return new Response(JSON.stringify(allDoctorsResult), {status: 200});
 
     } catch (err) {
-
+        console.log("ERRR", err);
         return new Response(JSON.stringify({ error: 'Failed to fetch doctors' }), { status: 500 });
     }
 
