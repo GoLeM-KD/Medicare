@@ -13,3 +13,15 @@
 
 
 }
+
+@media (max-width: 600px){
+
+  .cover-page {
+    width: 100vw;
+
+    background-image: url("../assets/GroupOfDoctors.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}

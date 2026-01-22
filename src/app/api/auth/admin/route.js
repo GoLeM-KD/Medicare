@@ -1,12 +1,17 @@
 import { queryDatabase } from '../../../db';
 import { NextResponse } from 'next/server';
 
+let userNameForErrors = ""; // these variavles to save userName and the email globally to handle catch section errors
+let emailForErrors = "";
+
 export async function POST(req) {
 
     try {
         const FormData = await req.formData();
         const userName = FormData.get('username');
+        userNameForErrors = userName;
         const email = FormData.get('email');
+        emailForErrors = email;
         const password = FormData.get('password');
         const role = FormData.get('role') || 'P';
         const firstName = FormData.get('firstName') || "";
@@ -112,18 +117,21 @@ export async function POST(req) {
             const emailcheckResult = await queryDatabase(emailcheckQry);
 
             if (userNamecheckResult.length > 0) {
+                console.log("----------------- KAVIJA USERNAME-----------------", err.name, "----");
                 return new Response(
-                    JSON.stringify({ success: true, msg: 'U' }),
+                    JSON.stringify({ success: false, msg: 'U' }),
                     { status: 400 }
                 );
             } else if (emailcheckResult.length > 0) {
+                console.log("----------------- KAVIJA EMAIL-----------------", err.name, "----");
                 return new Response(
-                    JSON.stringify({ success: true, msg: 'E' }),
+                    JSON.stringify({ success: false, msg: 'E' }),
                     { status: 400 }
                 );
             }
 
         }
+        console.log("----------------- KAVIJA MAIN -----------------", err.name, "----");
         return new Response(JSON.stringify({ Error_Register: err.number, error: err.name }), { status: 500 });
     }
 }

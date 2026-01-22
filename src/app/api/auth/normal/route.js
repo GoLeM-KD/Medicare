@@ -76,13 +76,15 @@ export async function POST(req) {
             const emailcheckResult = await queryDatabase(emailcheckQry);
 
             if (userNamecheckResult.length > 0) {
+                console.log("----------------- KAVIJA -----------------", err.name, "----");
                 return new Response(
-                JSON.stringify({ success: true, msg: 'U' }),
+                JSON.stringify({ success: true, msg: 'U', KAVIJA: err}),
                 { status: 400 }
                 );
             } else if (emailcheckResult.length > 0) {
+                console.log("----------------- KAVIJA -----------------", err.name, "----");
                 return new Response(
-                JSON.stringify({ success: true, msg: 'E' }),
+                JSON.stringify({ success: true, msg: 'E', KAVIJA: err}),
                 { status: 400 }
                 );
             }

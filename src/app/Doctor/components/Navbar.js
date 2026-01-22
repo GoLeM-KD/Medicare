@@ -38,49 +38,24 @@ export default function Navbar() {
     getUser();
     console.log(Image)
   },[])
-
-
-  const scrollToAbout = () => {
-    if (typeof window === "undefined") return; // SSR safety
-
-    const el = document.getElementById("about-us");
-    if (!el) {
-      console.warn("AboutUs section not found yet!");
-      return;
-    }
-
-    el.scrollIntoView({ behavior: "smooth" });
-  };
   return (
     <div className='w-full flex'>
 
       {/*-------------------------------------- DESKTOP --------------------------------------- */}
       <div className='hidden md:flex flex-row w-full h-[7.41vh] bg-[#F6F4EB] text-[#4682A9] items-center pl-[2.08vw] pr-[2.08vw]'>
 
-        <Link href="/User">
+        <Link href="/Doctor">
           <div className='font-bold text-[1.5rem]'>Medicare</div>
         </Link>
 
-        <div className='w-full flex flex-row justify-end items-center h-[7.41vh] gap-[4.9vw]'>
-          <button className='font-bold text-[16px] cursor-pointer' onClick={scrollToAbout}>
-            About us
-          </button>
-
-          <Link href="/User/BookADoctor" className='font-bold text-[16px]'>
-            Channeling
-          </Link>
-
-          <Link href="/User" className='font-bold text-[16px]'>
-            Reports
-          </Link>
-
-          <Link href="/User" className='font-bold text-[16px]'>
-            Contact Us
+        <div className='w-full flex flex-row justify-end items-center h-[7.41vh]'>
+          <Link href="/Doctor" className='font-bold text-[16px]'>
+            Appointments
           </Link>
 
           {loading ? (<p className='ml-[7.97vw]'>Loading...</p>): (
             <div className='ml-[7.97vw] flex flex-row gap-[2.29vw]'>
-              <Link href="/User/Profile">
+              <Link href="/Doctor/Profile">
                 <Image src={image || "/no-profile.png"} alt="user-Profile" width={30} height={30} className='rounded-[50px] w-[30px] h-[30px]'/>
               </Link>
 
@@ -106,42 +81,18 @@ export default function Navbar() {
 
             <DropdownMenuContent className='bg-[#F6F4EB] w-[72.82vw] h-screen mt-[1.635vh] flex flex-col items-center pl-[3.4vw] pr-[3.4vw] pt-[3.82vh] gap-[2.94vh] data-[state=open]:animate-[slide-in_0.3s_ease-out_forwards] data-[state=closed]:animate-[slide-in_0.3s_ease-out_forwards]'>
 
-              <DropdownMenuItem>
-                <Link href="/User/Profile" className='flex flex-row gap-[4.13vw] items-end'>
-                <Image src={image || "/no-profile.png"} alt='profile-image' width={50} height={50} className='rounded-full w-[50px] h-[50px]'/>
-                <p className='text-[4.85vw]'>{name}</p>
+              <DropdownMenuItem className='flex flex-row gap-[4.13vw] items-end'>
+                <Link href="/Doctor/Profile">
+                  <Image src={image || "/no-profile.png"} alt='profile-image' width={50} height={50} className='rounded-full w-[50px] h-[50px]'/>
+                  <p className='text-[4.85vw]'>{name}</p>
                 </Link>
               </DropdownMenuItem>
 
               <DropdownMenuSeparator className="bg-[#4682A9] h-px w-full"/>
 
               <DropdownMenuItem>
-                <button className='font-bold text-[4.85vw]' onClick={scrollToAbout}>
-                  About Us
-                </button>
-              </DropdownMenuItem>
-
-              <DropdownMenuSeparator className="bg-[#4682A9] h-px w-full"/>
-              
-              <DropdownMenuItem>
-                <Link href="/User/BookADoctor" className='font-bold text-[4.85vw]'>
-                  Channeling
-                </Link>
-              </DropdownMenuItem>
-
-              <DropdownMenuSeparator className="bg-[#4682A9] h-px w-full"/>
-
-              <DropdownMenuItem>
-                <Link href="/User" className='font-bold text-[4.85vw]'>
-                  Reports
-                </Link>
-              </DropdownMenuItem>
-
-              <DropdownMenuSeparator className="bg-[#4682A9] h-px w-full"/>
-
-              <DropdownMenuItem>
-                <Link href="/User" className='font-bold text-[4.85vw]'>
-                  Contact us
+                <Link href="/Doctor" className='font-bold text-[4.85vw]'>
+                  Appointments
                 </Link>
               </DropdownMenuItem>
 

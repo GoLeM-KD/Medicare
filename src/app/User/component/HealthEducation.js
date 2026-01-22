@@ -20,7 +20,8 @@ export default function HealthEducation () {
           src="https://www.youtube.com/embed/uOcpsXMJcJk?si=EoCutVAYq6JsnsXB" 
           title="YouTube video player" frameborder="0" 
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
+          className="w-[97.09vw] md:w-[560px]"></iframe>
         </div>
 
       </div>

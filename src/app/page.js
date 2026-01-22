@@ -1,34 +1,25 @@
-'use client'
-import React, { useEffect, useState } from 'react'
-import { useRouter } from "next/navigation";
+"use client";
+import React from "react";
+import "./page.css";
+import CoverPage from "./User/component/CoverPage";
+import AboutUsSection from "./User/component/About";
+import HealthEducationSection from "./User/component/HealthEducation";
+import NavBar from '../compontents/Navbar';
 
-export default function DashboardPage() {
-  const router = useRouter();
-  const [role, setRole] = useState('');
 
-  useEffect(() => {
-    const fetchRole = async () => {
-      const response = await fetch('/api/token/checkToken');
-      const data = await response.json();
-      setRole(data.role);
-    };
-    fetchRole();
-  }, []);
-
-  
-  useEffect(() => {
-    if (role === "A") {
-      router.push("/Admin");
-    } else if (role === "P") {
-      router.push("/User");
-    } else if (role === "D") {
-      router.push("/Doctor");
-    }
-  }, [role, router]);
+export default function page() {
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <p>Entering...</p>
+    <div>
+      <div className="fixed top-0 z-90 w-full">
+        <NavBar/>
+      </div>
+      <CoverPage className="cover_page" />
+      <div className="page_contents">
+        <AboutUsSection id="about-us"/>
+        <HealthEducationSection />
+
+      </div>
     </div>
   );
 }

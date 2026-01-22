@@ -1,8 +1,4 @@
-import { Margarine, Poppins } from "next/font/google";
-import { cookies } from 'next/headers';
-import { queryDatabase } from "../db";
-
-import Foot from "../../compontents/Footer";
+import { Poppins } from "next/font/google";
 import NavBar from "./component/Navbar";
 
 const poppa = Poppins({
@@ -12,29 +8,14 @@ const poppa = Poppins({
 
 export default async function UserLayout({ children }) {
 
-  const cookieStore = await cookies();
-  const token = cookieStore.get("token")?.value;
-
-  if (!token) {
-    redirect("/auth/Login");
-  }
-
-  const userRoleQuery = `
-    SELECT [Role]
-    FROM [dbo].[USER_MST]
-    WHERE [UserId] = '${token}'
-    `;
-  const userRoleResult = await queryDatabase(userRoleQuery);
-
-  if (userRoleResult[0]?.Role !== "P") {
-    redirect("/");
-  }
   return (
     
     <div>
-      <NavBar />
+      <div className="fixed top-0 z-90 w-full">
+        <NavBar />
+      </div>
       {children}
-      <Foot />
+      
     </div>
 
   );

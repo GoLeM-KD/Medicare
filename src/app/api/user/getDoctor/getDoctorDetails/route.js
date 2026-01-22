@@ -15,6 +15,7 @@ export async function GET(req) {
                 ,D.[Spcl]
                 ,D.[DcrDesc]
                 ,CAST(U.[FirstName] AS VARCHAR(MAX)) + ' ' + CAST(U.[LastName] AS VARCHAR(MAX)) AS name
+                ,U.[ImageURL]
             FROM [oulmsHospital].[dbo].[DOCTOR_MST] AS D
             INNER JOIN [oulmsHospital].[dbo].[USER_MST] AS U
             ON U.[UserId] = D.[UserID]

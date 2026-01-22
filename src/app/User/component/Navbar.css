@@ -4,7 +4,8 @@
   left: 0;
   width: 100%;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000; /*ensures it stays above other elements*/
+  z-index: 1000;
+  /*ensures it stays above other elements*/
 
 
 
@@ -44,11 +45,11 @@ nav ul a {
   color: #2E7DAF;
   text-decoration: none;
   font-weight: bold;
- 
-  
+
+
   padding-left: 10px;
   padding-right: 10px;
-  
+
   border-radius: 10px;
 }
 
@@ -59,39 +60,43 @@ nav ul a:hover {
 
 
 
-.sidebar{
-position: fixed;
-top: 0;
-right: 0;
-height: 100vh;
-width: 250px;
-z-index: 999;
-background-color: white;
-box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
-display: none;
-flex-direction: column;
-align-items: flex-start;
-justify-content: flex-start;
-padding-top: 20px;
+.sidebar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 250px;
+  z-index: 1500;
+  background-color: white;
+  box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-top: 20px;
 }
 
 .sidebar li {
   width: 100%;
 }
 
-.hamBurger{
+.hamBurger {
   display: none;
 }
 
 
 
-@media (max-width: 600px){
-  .hideOnMobile{
+@media (max-width: 960px) {
+  .hideOnMobile {
     display: none;
   }
 
-  .hamBurger{
+  .hamBurger {
     display: block;
+  }
+
+  .header {
+    width: 100vw;
   }
 
 }

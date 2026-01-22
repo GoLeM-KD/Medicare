@@ -6,14 +6,20 @@ export async function GET() {
     const cookieStore = await cookies();
     const tokens = cookieStore.get("token")?.value;
 
-    const userRoleQuery = `SELECT [Role]
+    const userRoleQuery = `SELECT 
+            [FirstName]
+            ,[LastName]
+            ,[UserName]
+            ,[Email]
+            ,[Role]
+            ,[ImageURL]
             FROM [dbo].[USER_MST]
             WHERE [UserId] = '${tokens}'
         `;
     const userRoleResult = await queryDatabase(userRoleQuery);
 
     return new Response(
-      JSON.stringify({ role: userRoleResult[0]?.Role || null }),
+      JSON.stringify({ role: userRoleResult[0]?.Role || null , datas:userRoleResult[0], token:tokens}),
       {
         status: 200,
         headers: { "Content-Type": "application/json" },

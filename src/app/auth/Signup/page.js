@@ -100,6 +100,7 @@ export default function page() {
           type="password"
           placeholder="Password"
           name="password"
+          autoComplete="new-password"
           className="border-1 border-black rounded-[5px] h-[30px] w-[300px] pl-[10px]"
           value={pwd}
           onChange={(e) => {

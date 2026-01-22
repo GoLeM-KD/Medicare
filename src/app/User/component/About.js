@@ -5,7 +5,7 @@ import HospitalImage01 from "../assets/HospitalImage01.png";
 import HospitalImage02 from "../assets/HospitalImage02.png";
 
 
-export default function About() {
+export default function About({id}) {
   const sectionData = {
     title: "MEDI CARE LANKA",
     subtitle: "Your trusted healthcare partner",
@@ -15,7 +15,7 @@ export default function About() {
   };
 
   return (
-    <div className="card_background">
+    <div className="card_background" id={id}>
 
             <div className="card_container">
                 <div className="about_section">
