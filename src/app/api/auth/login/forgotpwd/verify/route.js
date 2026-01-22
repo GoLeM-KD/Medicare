@@ -86,7 +86,7 @@ export async function POST(req) {
 
             await queryDatabase(updateOTPIFNOTqry);
 
-            return new Response(JSON.stringify({success : false, why: 'WRONG'}), {status: 500})
+            return new Response(JSON.stringify({success : false, why: 'WRONG'}), {status: 400})
 
         }
 

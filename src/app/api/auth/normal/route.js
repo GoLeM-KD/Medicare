@@ -90,6 +90,8 @@ export async function POST(req) {
             }
 
         }
+
+        console.log("ERROR NORMAL REGISTER...",err)
         return new Response(JSON.stringify({ Error_Register: err.number, error: err.name }), { status: 500 });
     }
 }
