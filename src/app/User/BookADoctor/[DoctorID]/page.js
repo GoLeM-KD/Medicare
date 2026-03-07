@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React, { useEffect, useState, use } from "react";
 
 export default function Page({ params }) {
@@ -17,7 +18,7 @@ export default function Page({ params }) {
   useEffect(() => {
     const fetchDoctorDetails = async () => {
       const res = await fetch(
-        `/api/user/getDoctor/getDoctorDetails?DoctorID=${doctorID}`
+        `/api/user/getDoctor/getDoctorDetails?DoctorID=${doctorID}`,
       );
       const tokenRes = await fetch("/api/token");
 
@@ -57,7 +58,7 @@ export default function Page({ params }) {
 
     if (res.ok && data.message == "S") {
       alert(
-        `Appointment Submitted Successfully. Your Appointment ID is ${data.apt}`
+        `Appointment Submitted Successfully. Your Appointment ID is ${data.apt}`,
       );
     } else {
       alert("Failed to submit appointment");
@@ -66,56 +67,89 @@ export default function Page({ params }) {
   };
 
   return (
-    <div className="mt-20">
-      {choosedDoctor.length > 0 ? (
-        choosedDoctor.map((doctor) => (
-          <div key={doctor.DoctorID} className="border p-4 mb-4">
-            <h1 className="text-xl font-bold mb-2">{doctor.name}</h1>
-          </div>
-        ))
-      ) : (
-        <p>Loading doctor details...</p>
-      )}
+    <div className="bg-[#749BC2] pt-[6.54vh] md:pt-[7.41vh] pl-0 md:pl-[81px] pr-0 md:pr-[81px] flex flex-col">
+      <div className="w-full flex flex-col justify-center items-center mt-[15px] md:mt-[52px] mb-[49px] md:mb-[88px]">
+        <p className="font-bold text-[#FFFFFF] text-[24px]">Appointment Form</p>
+        {choosedDoctor.length > 0 ? (
+          choosedDoctor.map((doctor) => (
+            <div
+              key={doctor.DoctorID}
+              className="w-full flex flex-col md:flex-row justify-center md:justify-start items-center md:items-start text-[#FFFFFF] mt-[15px] md:mt-[52px]"
+            >
+              <div className="min-w-[250px] h-[250px] bg-[#4682A9] flex justify-center items-center rounded-[15px]">
+                <Image
+                  src={doctor.ImageURL || "/No-person-Doctor.png"}
+                  alt="DoctorImage"
+                  width={200}
+                  height={200}
+                  className="w-[200px] h-[200px] rounded-[15px]"
+                />
+              </div>
 
-      <form onSubmit={(e) => e.preventDefault()}>
-        <input
-          type="text"
-          placeholder="Name"
-          name="Pname"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="border-1 border-black"
-        />
+              <div className="w-full flex flex-col items-center md:items-start ml-0 md:ml-[2.92vw]">
+                <p className="font-bold text-[20px]">
+                  {doctor.name || "No Name"}
+                </p>
+                <p className="text-[16px]">
+                  {doctor.Progeram || "Not Updated"}
+                </p>
+                <p className="text-[20px] mt-[4.25vh]">
+                  {doctor.Spcl || "Not Updated"}
+                </p>
+                <p className="text-[20px] mt-[2vh]">
+                  {doctor.DcrDesc || "No Description"}
+                </p>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>Loading doctor details...</p>
+        )}
+      </div>
 
-        <input
-          type="datetime-local"
-          className="border-1 border-black"
-          name="dateAndTime"
-          value={dateAndTime}
-          onChange={(e) => setDateAndTime(e.target.value)}
-        />
+      <form onSubmit={(e) => e.preventDefault()} className="flex flex-col justify-center md:justify-start items-center md:items-start">
+        <div className="flex flex-col md:flex-row md:flex-wrap w-full justify-center md:justify-between items-center gap-[28px] md:gap-[0]">
+          <input
+            type="text"
+            placeholder="Name"
+            name="Pname"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-[350px] md:w-[790px] h-[50px] bg-[#F6F4EB] text-[#000000] rounded-[15px] pl-[24px] md:pl-[31px] text-[15px]"
+          />
+
+          <input
+            type="datetime-local"
+            className="w-[350px] md:w-[790px] h-[50px] bg-[#F6F4EB] text-[#000000] rounded-[15px] pl-[24px] md:pl-[31px] pr-[24px] md:pr-[28px]"
+            name="dateAndTime"
+            value={dateAndTime}
+            onChange={(e) => setDateAndTime(e.target.value)}
+          />
+        </div>
 
         <textarea
           placeholder="Your reason short and sweet"
           name="reason"
           value={reason}
           onChange={(e) => setReason(e.target.value)}
-          className="border-1 border-black"
+          className="w-[350px] md:w-full bg-[#F6F4EB] text-[#000000] rounded-[15px] min-h-[302px] pl-[24px] md:pl-[31px] pt-[10px] mt-[28px] md:mt-[6.57vh]"
         />
 
-        {isAppointmentLoading ? (
-          <button className="border-1 border-black bg-[#88b5ba] hover:cursor-pointer pl-[10px] pr-[10px]">
-            Placing...
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={handleSubmitAppointment}
-            className="border-1 border-black bg-[#88b5ba] hover:cursor-pointer pl-[10px] pr-[10px]"
-          >
-            Place the Appointment
-          </button>
-        )}
+        <div className="w-full flex justify-center items-center mt-[28px] md:mt-[71px]">
+          {isAppointmentLoading ? (
+            <button className="w-[350px] md:w-[790px] h-[50px] bg-[#44DB55] text-[#FFFFFF] font-bold text-[16px] md:text-[20px] rounded-[15px] cursor-pointer drop-shadow-[-2px_8px_8px_rgba(0,0,0,0.5)] hover:drop-shadow-[-2px_5px_8px_rgba(0,0,0,0.5)] mb-[28px] md:mb-[71px]">
+              Placing...
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={handleSubmitAppointment}
+              className="w-[350px] md:w-[790px] h-[50px] bg-[#44DB55] text-[#FFFFFF] font-bold text-[16px] md:text-[20px] rounded-[15px] cursor-pointer drop-shadow-[-2px_8px_8px_rgba(0,0,0,0.5)] hover:drop-shadow-[-2px_5px_8px_rgba(0,0,0,0.5)] mb-[28px] md:mb-[71px]"
+            >
+              Place the Appointment
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );
