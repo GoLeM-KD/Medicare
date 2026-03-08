@@ -38,7 +38,7 @@ export function AppointmentCard({ appointment, onClick }) {
             </div>
           </div>
         </div>
-        {appointment.checked && (
+        {appointment.Status === 1 && (
           <div className="flex items-center gap-1 text-green-600 text-sm">
             <CheckCircle className="w-4 h-4" />
             <span>Checked</span>

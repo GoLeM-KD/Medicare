@@ -1,13 +1,25 @@
-'use client'
+"use client";
 import React from "react";
 import { X, User, FileText, CheckCircle } from "lucide-react";
 import { Button } from "./ui/button";
 
-export function AppointmentDetailDialog({
-  appointment,
-  onClose,
-  onCheck,
-}) {
+export function AppointmentDetailDialog({ appointment, onClose, onCheck }) {
+  let formattedTime = "";
+
+  if (appointment?.AptDateTime) {
+    const rawTime = appointment.AptDateTime.split("T")[1]?.slice(0, 8);
+    console.log("WORKS...1", rawTime);
+    if (rawTime) {
+      const [hour, minute] = rawTime.split(":");
+
+      const hourNum = parseInt(hour);
+      const ampm = hourNum >= 12 ? "PM" : "AM";
+      const displayHour = hourNum % 12 || 12;
+
+      formattedTime = `${displayHour}:${minute} ${ampm}`;
+      console.log("STATUS...", appointment.Status);
+    }
+  }
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
       <div className="bg-white rounded-xl shadow-2xl max-w-md w-full">
@@ -33,7 +45,7 @@ export function AppointmentDetailDialog({
               <div>
                 <p className="text-sm text-gray-500">Patient Name</p>
                 <p className="font-semibold text-lg text-gray-900">
-                  {appointment.patientName}
+                  {appointment.Name}
                 </p>
               </div>
             </div>
@@ -43,7 +55,9 @@ export function AppointmentDetailDialog({
                 <FileText className="w-5 h-5 text-blue-600 mt-0.5" />
                 <div>
                   <p className="text-sm text-gray-600 mb-1">Reason for Visit</p>
-                  <p className="font-medium text-gray-900">{appointment.reason}</p>
+                  <p className="font-medium text-gray-900">
+                    {appointment.Reason}
+                  </p>
                 </div>
               </div>
             </div>
@@ -52,23 +66,25 @@ export function AppointmentDetailDialog({
               <div className="flex-1 bg-gray-50 rounded-lg p-3">
                 <p className="text-gray-500 mb-1">Date</p>
                 <p className="font-medium text-gray-900">
-                  {new Date(appointment.date).toLocaleDateString("en-US", {
+                  {new Date(appointment.AptDateTime).toLocaleDateString(
+                    "en-CA",{
                     weekday: "short",
                     month: "short",
                     day: "numeric",
                     year: "numeric",
-                  })}
+                  }
+                  )}
                 </p>
               </div>
               <div className="flex-1 bg-gray-50 rounded-lg p-3">
                 <p className="text-gray-500 mb-1">Time</p>
-                <p className="font-medium text-gray-900">{appointment.time}</p>
+                <p className="font-medium text-gray-900">{formattedTime}</p>
               </div>
             </div>
           </div>
 
           {/* Status */}
-          {appointment.checked && (
+          {appointment.Status === 1 && (
             <div className="bg-green-50 border border-green-200 rounded-lg p-4 flex items-center gap-3">
               <CheckCircle className="w-5 h-5 text-green-600" />
               <div>
@@ -82,16 +98,12 @@ export function AppointmentDetailDialog({
 
           {/* Action Buttons */}
           <div className="flex gap-3">
-            <Button
-              onClick={onClose}
-              variant="outline"
-              className="flex-1"
-            >
+            <Button onClick={onClose} variant="outline" className="flex-1">
               Close
             </Button>
-            {!appointment.checked && (
+            {appointment.Status !== 1 && (
               <Button
-                onClick={() => onCheck(appointment.id)}
+                onClick={() => onCheck(appointment.AptID)}
                 className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
               >
                 <CheckCircle className="w-4 h-4 mr-2" />

@@ -33,3 +33,29 @@ export async function GET(req) {
         return new Response(JSON.stringify({Error: err}), {status:500});
     }
 }
+
+// Updating the status of an appointment
+export async function PUT(req) {
+
+    try {
+
+        const FormData = await req.formData();
+        const appointmentID = FormData.get("aptID");
+
+        const updateQry = `
+            UPDATE [dbo].[APPOINTMENT_DTL]
+            SET [Status] = 1
+            WHERE [AptID] = '${appointmentID}'
+        `;
+
+        await queryDatabase(updateQry);
+
+        return new Response(JSON.stringify({success :true}), {status: 200});
+
+    } catch(err) {
+
+        console.log("ERROR APT STATUS....", err);
+        return new Response(JSON.stringify({ERROR: err, success: false}), {status: 500})
+    }
+
+}

@@ -10,7 +10,7 @@ export function DateFilter({ selectedDate, onDateChange }) {
 
   const handleDateSelect = (date) => {
     if (date) {
-      const formattedDate = date.toLocaleDateString("en-CA");;
+      const formattedDate = date.toLocaleDateString("en-CA");
       onDateChange(formattedDate);
       setIsOpen(false);
       console.log(formattedDate, "DATE FILTER...")

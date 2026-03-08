@@ -7,7 +7,9 @@ import { AppointmentDetailDialog } from "./components/AppointmentDetailDialog";
 
 export default function page() {
   const [selectedAppointment, setSelectedAppointment] = useState(null);
-  const [filterDate, setFilterDate] = useState(new Date().toLocaleDateString("en-CA")); // Today's date
+  const [filterDate, setFilterDate] = useState(
+    new Date().toLocaleDateString("en-CA"),
+  ); // Today's date
   const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
@@ -21,8 +23,35 @@ export default function page() {
     getAppointments();
   }, [filterDate]);
 
+  const handleCheckDB = async (id) => {
+    const formData = new FormData();
+    formData.append("aptID", id);
+
+    const respond = await fetch(`../api/doctor/appointment`, {
+      method: "PUT",
+      body: formData,
+    });
+
+    const result = await respond.json();
+
+    if (!result.success) {
+      alert(result.ERROR);
+      return;
+    }
+  };
+
+  const handleCheck = async (id) => {
+    setAppointments((prev) =>
+      prev.map((apt) => (apt.AptID === id ? { ...apt, Status: 1 } : apt)),
+    );
+    await handleCheckDB(id);
+    setSelectedAppointment(null);
+  };
+
+  const checkedAppointments = appointments.filter((a) => a.Status === 1);
+
   return appointments ? (
-    <div className="max-w-5xl mx-auto pl-[15px] md:pl-0 pr-[15px] md:pr-0">
+    <div className="max-w-5xl min-h-screen mx-auto pl-[15px] md:pl-0 pr-[15px] md:pr-0 pt-[30px] mb-[30px]">
       {/* Header Section */}
       <div className="mb-8">
         <h1 className="text-[24px] md:text-3xl  font-bold text-gray-900 mb-2">
@@ -49,7 +78,7 @@ export default function page() {
               <span className="text-green-600 text-sm font-semibold">✓</span>
             </div>
           </div>
-          <p className="text-3xl font-bold text-gray-900">checkedCount</p>
+          <p className="text-3xl font-bold text-gray-900">{checkedAppointments.length}</p>
         </div>
         <div className="bg-white border-2 border-blue-100 rounded-xl p-6 shadow-lg">
           <div className="flex items-center justify-between mb-2">
@@ -58,18 +87,13 @@ export default function page() {
               <span className="text-blue-600 text-sm font-semibold">•••</span>
             </div>
           </div>
-          <p className="text-3xl font-bold text-gray-900">
-            {appointments.length}
-          </p>
+          <p className="text-3xl font-bold text-gray-900">{appointments.length - checkedAppointments.length}</p>
         </div>
       </div>
 
       {/* Date Filter */}
       <div className="mb-6">
-        <DateFilter
-          selectedDate={filterDate}
-          onDateChange={setFilterDate}
-        />
+        <DateFilter selectedDate={filterDate} onDateChange={setFilterDate} />
       </div>
 
       {/* Appointments List */}
