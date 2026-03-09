@@ -64,7 +64,7 @@ export default function Navbar() {
                 </div>
               </Link>
               <Link
-                href="/Profile"
+                href="/Doctor/Profile"
                 className={`px-4 py-2 rounded-lg transition-colors ${"text-white hover:bg-blue-700"}`}
               >
                 <div className="flex items-center gap-2">
@@ -93,7 +93,7 @@ export default function Navbar() {
             <DropdownMenuContent className="bg-blue-600 w-[72.82vw] min-h-screen mt-[1.635vh] z-90 flex flex-col items-center pl-[3.4vw] pr-[3.4vw] pt-[3.82vh] gap-[2.94vh] data-[state=open]:animate-[slide-in_0.3s_ease-out_forwards] data-[state=closed]:animate-[slide-in_0.3s_ease-out_forwards]">
               <DropdownMenuItem>
                 <Link
-                  href="/User/Profile"
+                  href="/Doctor/Profile"
                   className="flex flex-row gap-[4.13vw] items-end"
                 >
                   <Image
