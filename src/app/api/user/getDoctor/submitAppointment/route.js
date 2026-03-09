@@ -8,6 +8,7 @@ export async function POST(req) {
     // had to format the date time to match sql datetime format
     const appointmentDate = FormData.get("dateAndTime");
     const formattedDateTime = appointmentDate.replace("T", " ") + ":00";
+    console.log(formattedDateTime, "APPOINTMENT DATE TIME....")
     //......
     const reason = FormData.get("reason");
     const doctorID = FormData.get("DoctorID");

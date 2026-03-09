@@ -1,10 +1,7 @@
 import React from 'react'
 
-export default function ProfilePage() {
+export default function page() {
   return (
-    <div className='bg-[#91C8E4] flex w-full'>
-        
-       
-    </div>
+    <div>page</div>
   )
 }
