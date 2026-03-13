@@ -1,6 +1,7 @@
 'use client'
-import React,{useState} from 'react'
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+
 
 export default function page() {
 
@@ -161,5 +162,9 @@ export default function page() {
             <button type='button' className='w-[300px] h-[30px] rounded-[5px] bg-[#315b91] text-[#FFFFFF] cursor-pointer' onClick={handleRegister}>Sign Up</button>
         </form>
     </div>
+
+
+
+
   )
 }
