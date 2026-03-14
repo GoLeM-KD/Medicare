@@ -1,4 +1,5 @@
 import { Poppins } from "next/font/google";
+import NavBar from "./components/Navbar";
 
 const poppa = Poppins({
   weight: ["100","200","400","600", "700"],
@@ -10,6 +11,7 @@ export default async function AdminLayout({children}) {
       <div
         className={poppa.className}
       >
+        <NavBar/>
         {children}
       </div>
   );
