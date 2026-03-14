@@ -59,7 +59,15 @@ export default function Navbar() {
 
         <div className="w-full flex flex-row justify-end items-center h-[7.41vh] gap-[4.9vw]">
           <Link href="/Admin" className="font-bold text-[16px]">
+            User Management
+          </Link>
+
+          <Link href="/Admin/Appoinment" className="font-bold text-[16px]">
             Appointments
+          </Link>
+
+          <Link href="/Admin/RegisterMembers" className="font-bold text-[16px]">
+            Register a Member
           </Link>
 
           {loading ? (
@@ -126,7 +134,31 @@ export default function Navbar() {
                   href="/Admin"
                   className="font-bold text-[4.85vw]"
                 >
+                  User Management
+                </Link>
+              </DropdownMenuItem>
+
+              <DropdownMenuSeparator className="bg-[#4682A9] h-px w-full" />
+
+              <DropdownMenuSeparator className="bg-[#4682A9] h-px w-full" />
+
+              <DropdownMenuItem>
+                <Link
+                  href="/Admin/Appoinment"
+                  className="font-bold text-[4.85vw]"
+                >
                   Appointments
+                </Link>
+              </DropdownMenuItem>
+
+              <DropdownMenuSeparator className="bg-[#4682A9] h-px w-full" />
+
+              <DropdownMenuItem>
+                <Link
+                  href="/Admin/RegisterMembers"
+                  className="font-bold text-[4.85vw]"
+                >
+                  Register a member
                 </Link>
               </DropdownMenuItem>
 
