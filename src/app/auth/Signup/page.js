@@ -45,12 +45,12 @@ export default function page() {
     setLoading(false);
   };
   return (
-    <div className="flex justify-center items-center h-screen w-full bg-[#ffffff]">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-t from-[#749bc2] to-[#f7f4eb]">
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="w-[400px] h-[500px] border-1 border-black flex flex-col justify-center items-center text-[#000000] gap-[10px]"
+        className="w-[400px] h-[500px] bg-white rounded-2xl shadow-xl border-black flex flex-col justify-center items-center text-[#000000] gap-[10px]"
       >
-        <h1 className="font-[30px] font-bold">Sign Up</h1>
+        <h1 className="text-2xl font-bold text-center text-dark blue-800 mb-6">Sign Up</h1>
 
         {err ? (
           <p className="text-red-500" id="error">
@@ -64,7 +64,7 @@ export default function page() {
           type="text"
           placeholder="first Name"
           name="firstName"
-          className="border-1 border-black rounded-[5px] h-[30px] w-[300px] pl-[10px]"
+          className="border-3 border-[#749bc2] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-dark-blue"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
         />
@@ -73,7 +73,7 @@ export default function page() {
           type="text"
           placeholder="last Name"
           name="lastName"
-          className="border-1 border-black rounded-[5px] h-[30px] w-[300px] pl-[10px]"
+          className="border-3 border-[#749bc2] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-dark-blue"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
         />
@@ -82,7 +82,7 @@ export default function page() {
           type="text"
           placeholder="Username"
           name="username"
-          className="border-1 border-black rounded-[5px] h-[30px] w-[300px] pl-[10px]"
+          className="border-3 border-[#749bc2] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-dark-blue"
           value={username}
           onChange={(e) => setusername(e.target.value)}
         />
@@ -91,7 +91,7 @@ export default function page() {
           type="email"
           placeholder="Email"
           name="email"
-          className="border-1 border-black rounded-[5px] h-[30px] w-[300px] pl-[10px]"
+          className="border-3 border-[#749bc2] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-dark-blue"
           value={email}
           onChange={(e) => setemail(e.target.value)}
         />
@@ -101,7 +101,7 @@ export default function page() {
           placeholder="Password"
           name="password"
           autoComplete="new-password"
-          className="border-1 border-black rounded-[5px] h-[30px] w-[300px] pl-[10px]"
+          className="border-3 border-[#749bc2] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-dark-blue"
           value={pwd}
           onChange={(e) => {
             setpwd(e.target.value);
@@ -133,7 +133,7 @@ export default function page() {
           type="password"
           placeholder="Confirm Password"
           name="confirmPassword"
-          className="border-1 border-black rounded-[5px] h-[30px] w-[300px] pl-[10px]"
+          className="border-3 border-[#749bc2] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-dark-blue"
           value={cpwd}
           onChange={(e) => {
             setcpwd(e.target.value);
@@ -148,14 +148,14 @@ export default function page() {
         {isLoading ? (
           <button
             type="button"
-            className="w-[300px] h-[30px] rounded-[5px] bg-[#315b91] text-[#FFFFFF] cursor-pointer"
+            className="w-[150px] bg-[#749bc2] hover:bg-[#2b376b] text-white font-bold p-2 rounded-lg transition"
           >
             Loading...
           </button>
         ) : (
           <button
             type="button"
-            className="w-[300px] h-[30px] rounded-[5px] bg-[#315b91] text-[#FFFFFF] cursor-pointer"
+            className="w-[150px] bg-[#749bc2] hover:bg-[#2b376b] text-white font-bold p-2 rounded-lg transition"
             onClick={handleRegister}
           >
             Sign Up

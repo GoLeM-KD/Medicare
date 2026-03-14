@@ -127,18 +127,18 @@ function page() {
     });
   };
   return (
-    <div className="flex justify-center items-center h-screen w-full bg-[#ffffff]">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-t from-[#749bc2] to-[#f7f4eb]">
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="w-[400px] h-[300px] border-1 border-black flex flex-col justify-center items-center text-[#000000] gap-[10px]"
+        className="w-[350px] h-[400px] bg-white rounded-2xl shadow-xl flex flex-col justify-center items-center text-[#000000] gap-[10px]"
       >
-        <h1 className="font-[30px]">Login Page</h1>
+        <h1 className="text-2xl font-bold text-center text-dark blue-800 mb-6">Login</h1>
 
         <input
           type="text"
           placeholder="Username or email"
           name="username"
-          className="border-1 border-black rounded-[5px] h-[30px] w-[300px] pl-[10px]"
+          className="border-3 border-[#749bc2] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-dark-blue"
           value={username}
           onChange={(e) => setusername(e.target.value)}
         />
@@ -146,7 +146,7 @@ function page() {
           type="password"
           placeholder="Password"
           name="password"
-          className="border-1 border-black rounded-[5px] h-[30px] w-[300px] pl-[10px]"
+          className="border-3 border-[#749bc2] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-dark-blue"
           value={password}
           onChange={(e) => setpassword(e.target.value)}
         />
@@ -154,14 +154,14 @@ function page() {
         {isLoading ? (
           <button
             type="button"
-            className="w-[300px] h-[30px] rounded-[5px] bg-[#315b91] text-[#FFFFFF] cursor-pointer"
+            className="w-[150px] bg-[#749bc2] hover:bg-[#2b376b] text-white font-bold p-2 rounded-lg transition"
           >
             Loading...
           </button>
         ) : (
           <button
             type="button"
-            className="w-[300px] h-[30px] rounded-[5px] bg-[#315b91] text-[#FFFFFF] cursor-pointer"
+            className="w-[150px] bg-[#749bc2] hover:bg-[#2b376b] text-white font-bold p-2 rounded-lg transition"
             onClick={handleLogin}
           >
             Login
@@ -169,7 +169,7 @@ function page() {
         )}
 
         <button
-          className="text-[#082c66] text-[14px] md:text-[16px] text-center md:text-left md:pl-[1vw] transition duration-300 hover:scale-105 hover:text-[#5388cf] cursor-pointer"
+          className="text-sm text-dark blue-500 hover:underline text-right"
           onClick={handelingForgotPwd}
         >
           Forgotten Password?

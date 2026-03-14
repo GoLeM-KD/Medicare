@@ -1,7 +1,6 @@
 'use client'
+import React,{useState} from 'react'
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-
 
 export default function page() {
 
@@ -61,16 +60,16 @@ export default function page() {
 
   return (
     <div className='flex justify-center items-center h-screen w-full bg-[#ffffff]'>
-        <form onSubmit={(e) => e.preventDefault()} className='w-[500px] h-[600px] border-1 border-black flex flex-col justify-center items-center text-[#000000] gap-[20px]'>
-            <h1 className='font-[30px] font-bold'>Register A Member</h1>
+        <form onSubmit={(e) => e.preventDefault()} className='w-[500px] h-[600px] rounded-2xl shadow-2xl flex flex-col justify-center items-center text-[#000000] gap-[20px]'>
+            <h1 className='text-2xl font-bold text-center text-dark blue-800 mb-6'>Register A Member</h1>
 
             {err ? <p className='text-red-500' id='error'>{err}</p> : ""}
 
             <input 
                 type='text' 
-                placeholder='first Name' 
+                placeholder='First Name' 
                 name='firstName'
-                className='border-1 border-black rounded-[5px] h-[30px] w-[300px] pl-[10px]'
+                className='border-3 border-[#749bc2] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-dark-blue h-[30px] w-[300px] pl-[10px]'
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)} 
             />
@@ -79,7 +78,7 @@ export default function page() {
                 type='text' 
                 placeholder='last Name' 
                 name='lastName' 
-                className='border-1 border-black rounded-[5px] h-[30px] w-[300px] pl-[10px]'
+                className='border-3 border-[#749bc2] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-dark-blue h-[30px] w-[300px] pl-[10px]'
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)} 
             />
@@ -88,7 +87,7 @@ export default function page() {
                 type='text' 
                 placeholder='Username' 
                 name='username' 
-                className='border-1 border-black rounded-[5px] h-[30px] w-[300px] pl-[10px]'
+                className='border-3 border-[#749bc2] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-dark-blue h-[30px] w-[300px] pl-[10px]'
                 value={username}
                 onChange={(e) => setusername(e.target.value)} 
             />
@@ -97,7 +96,7 @@ export default function page() {
                 type='email' 
                 placeholder='Email' 
                 name='email' 
-                className='border-1 border-black rounded-[5px] h-[30px] w-[300px] pl-[10px]'
+                className='border-3 border-[#749bc2] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-dark-blue h-[30px] w-[300px] pl-[10px]'
                 value={email}
                 onChange={(e) => setemail(e.target.value)} 
             />
@@ -106,7 +105,7 @@ export default function page() {
                 type='password' 
                 placeholder='Password' 
                 name='password' 
-                className='border-1 border-black rounded-[5px] h-[30px] w-[300px] pl-[10px]'
+                className='border-3 border-[#749bc2] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-dark-blue h-[30px] w-[300px] pl-[10px]'
                 value={pwd}
                 onChange={(e) => {
                     setpwd(e.target.value);
@@ -136,7 +135,7 @@ export default function page() {
                 type='password' 
                 placeholder='Confirm Password' 
                 name='confirmPassword' 
-                className='border-1 border-black rounded-[5px] h-[30px] w-[300px] pl-[10px]' 
+                className='border-3 border-[#749bc2] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-dark-blue] h-[30px] w-[300px] pl-[10px]' 
                 value={cpwd}
                 onChange={(e) => {
                     setcpwd(e.target.value);
@@ -162,9 +161,5 @@ export default function page() {
             <button type='button' className='w-[300px] h-[30px] rounded-[5px] bg-[#315b91] text-[#FFFFFF] cursor-pointer' onClick={handleRegister}>Sign Up</button>
         </form>
     </div>
-
-
-
-
   )
 }
