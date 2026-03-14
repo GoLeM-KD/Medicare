@@ -21,7 +21,7 @@ export async function GET(req) {
                 ,[Role]
                 ,[ImageURL]
             FROM [dbo].[USER_MST]
-            WHERE [UserId] != 'UID00001'
+            WHERE [UserId] != '${tokens}'
         `;
 
         if(nameOrIDorUserName && !selectedRole) {
