@@ -31,7 +31,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "components/ui/skeleton.tsxx"  ],
   "exclude": [
     "node_modules"
   ]
