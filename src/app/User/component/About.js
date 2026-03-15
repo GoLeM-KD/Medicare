@@ -1,11 +1,10 @@
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
 import "./About.css";
 import HospitalImage01 from "../assets/HospitalImage01.png";
 import HospitalImage02 from "../assets/HospitalImage02.png";
 
-
-export default function About({id}) {
+export default function About({ id }) {
   const sectionData = {
     title: "MEDI CARE LANKA",
     subtitle: "Your trusted healthcare partner",
@@ -16,23 +15,34 @@ export default function About({id}) {
 
   return (
     <div className="card_background" id={id}>
+      <div className="card_container">
+        <div className="about_section">
+          <h2>{sectionData.title}</h2>
+          <h3>{sectionData.subtitle}</h3>
 
-            <div className="card_container">
-                <div className="about_section">
-                    <h2>{sectionData.title}</h2>
-                    <h3>{sectionData.subtitle}</h3>
-                
-                    <p>
-                        {sectionData.content}
-                        <br/>
-                        {sectionData.linkText}
-                    </p>
-                </div>
-                <div className="photo_section">
-                    <Image src={HospitalImage01} width={480} height={270} alt="hospitalImage01" className="hospitalImage01"/>
-                    <Image src={HospitalImage02} width={480} height={270} alt="hospitalImage02" className="hospitalImage01"/>
-                </div>
-            </div>
+          <p>
+            {sectionData.content}
+            <br />
+            {sectionData.linkText}
+          </p>
         </div>
+        <div className="photo_section">
+          <Image
+            src={HospitalImage01}
+            width={480}
+            height={270}
+            alt="hospitalImage01"
+            className="hospitalImage01"
+          />
+          <Image
+            src={HospitalImage02}
+            width={480}
+            height={270}
+            alt="hospitalImage02"
+            className="hospitalImage01"
+          />
+        </div>
+      </div>
+    </div>
   );
 }

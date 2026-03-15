@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
         className={poppa.className}
       >
         {children}
-        <Footer />
+        <Footer id="foot"/>
       </body>
     </html>
   );

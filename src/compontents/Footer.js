@@ -1,7 +1,7 @@
 import './Footer.css';
 import React from 'react'
 
-export default function footer() {
+export default function footer({id}) {
 const contactInfoItems = [
     {
       icon: "https://c.animaapp.com/hs0kYMVc/img/icons8-location-20-1@2x.png",
@@ -21,7 +21,7 @@ const contactInfoItems = [
   ];
 
   return (
-    <footer className="footer">
+    <footer className="footer" id={id}>
       <div className="footer-container">
         <div className="desctption">
           <h2>MEDI CARE</h2>
