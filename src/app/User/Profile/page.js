@@ -354,7 +354,7 @@ export default function page() {
 
   return (
     <form
-      className="w-full bg-[#91C8E4] flex flex-col pt-[8vh] md:pt-[9vh] pb-[2vh] md:pb-[4vh] items-center"
+      className="w-full bg-[#91C8E4] flex flex-col pt-[8vh] md:pt-[9vh] pb-[2vh] md:pb-[4vh] items-center min-h-screen"
       onSubmit={(e) => e.preventDefault()}
     >
       <div className="w-[300px] md:w-[67.71vw] border-b-1 border-black flex flex-col md:flex-row md:flex-wrap items-center md:justify-center gap-[2vh] md-[2vw] pt-[2vh] pb-[2vh]">

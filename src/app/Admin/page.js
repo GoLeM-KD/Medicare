@@ -1,6 +1,6 @@
 "use client";
-import { Search } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 export default function Page() {
   const [search, setSearch] = useState("");
@@ -16,23 +16,59 @@ export default function Page() {
             ? `../api/admin/userManagment?search=${search}`
             : search && searchedRole
               ? `../api/admin/userManagment?role=${searchedRole}&search=${search}`
-              : "../api/admin/userManagment"
+              : "../api/admin/userManagment",
       );
 
       const usersResult = await userRequests.json();
-      console.log("ADMIN USERS...",usersResult.users);
+      console.log("ADMIN USERS...", usersResult.users);
       setUsers(usersResult.users);
-
-      
     };
 
     getUsers();
-
   }, [search, searchedRole]);
 
   const handleClearFilter = () => {
     setSearchedRole("");
-  }
+  };
+
+  const deleteUser = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const formData = new FormData();
+        formData.append("UID", id);
+
+        const requestDelete = await fetch(
+          `../api/admin/userManagment`,
+          { method: "DELETE", body: formData },
+        );
+        const respondDelete = await requestDelete.json();
+
+        if (respondDelete.success) {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+
+          return router.push("/Admin/Appoinment");
+        } else if (!respondDelete.success) {
+          Swal.fire({
+            title: "Oops!",
+            text: `Appointment Deletion failed \n Error : ${respondDelete.ERROR}`,
+            icon: "error",
+          });
+        }
+      }
+    });
+  };
 
   return (
     <div className="w-full min-h-screen">
@@ -85,8 +121,12 @@ export default function Page() {
             <label for="admins">Admins</label>
           </div>
 
-          <button className="w-[150px] bg-[#4c76b5] text-[#FFFFFF] rounded-[5px] cursor-pointer" onClick={handleClearFilter}>Clear Filters</button>
-          
+          <button
+            className="w-[150px] bg-[#4c76b5] text-[#FFFFFF] rounded-[5px] cursor-pointer"
+            onClick={handleClearFilter}
+          >
+            Clear Filters
+          </button>
         </div>
       </div>
 
@@ -94,7 +134,7 @@ export default function Page() {
         {/* users */}
         {users.length > 0 ? (
           users.map((user) => (
-            <div className="py-8 px-8 min-w-sm mx-auto bg-white rounded-xl shadow-2xl space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6">
+            <div className="py-8 px-8 min-w-sm mx-auto bg-white rounded-xl shadow-2xl space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6 cursor-pointer" onClick={() => {deleteUser(user.UserId)}}>
               <img
                 className="block mx-auto w-[80px] h-[80px] rounded-[50%] sm:mx-0 sm:shrink-0"
                 src={user.ImageURL || "/no-profile.png"}
@@ -105,14 +145,20 @@ export default function Page() {
                   <p className="text-lg text-black font-semibold">
                     {user.FirstName} {user.LastName}
                   </p>
-                  <p className="text-slate-500 font-medium">{user.Role === "P" ? "Patient" : user.Role === "D" ? "Doctor" : "Admin"}</p>
+                  <p className="text-slate-500 font-medium">
+                    {user.Role === "P"
+                      ? "Patient"
+                      : user.Role === "D"
+                        ? "Doctor"
+                        : "Admin"}
+                  </p>
                 </div>
               </div>
             </div>
           ))
-
-        ) : (<p>Loading...</p>)}
-
+        ) : (
+          <p>Loading...</p>
+        )}
       </div>
     </div>
   );

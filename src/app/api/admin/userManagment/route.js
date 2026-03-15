@@ -48,3 +48,26 @@ export async function GET(req) {
         return new Response(JSON.stringify({Error: err}), {status: 500});
     } 
 }
+
+export async function DELETE(req) {
+
+    try {
+
+        const FormData = await req.formData();
+        const uid = FormData.get("UID");
+
+        const qry = `
+            DELETE FROM [dbo].[USER_MST]
+            WHERE [UserId] = '${uid}'
+        `;
+
+        await queryDatabase(qry);
+
+        return new Response(JSON.stringify({success : true}), {status : 200});
+
+    } catch (err) {
+
+        console.log("ADMIN DELETE...", err);
+        return new Response(JSON.stringify({success: false, ERROR : err}), {status : 500});
+    }
+}

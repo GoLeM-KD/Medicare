@@ -1,11 +1,17 @@
 "use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+
+
 
 export default function SearchAppointments() {
   const [appointments, setAppointments] = useState([]);
   const [search, setSearch] = useState("");
+
+  const router = useRouter();
+
 
   useEffect(() => {
     const getAppointments = async () => {
@@ -46,6 +52,9 @@ export default function SearchAppointments() {
             text: "Your file has been deleted.",
             icon: "success",
             });
+
+            return router.push("/Admin/Appoinment");
+
         } else if (!respondDelete.success) {
             Swal.fire({
             title: "Oops!",
