@@ -24,7 +24,8 @@ export function AppointmentDetailDialog({ appointment, onClose, onCheck }) {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
       <div className="bg-white rounded-xl shadow-2xl max-w-md w-full">
         {/* Header */}
-        <div className="bg-blue-600 text-white px-6 py-4 rounded-t-xl flex items-center justify-between">
+        <div className="bg-blue-600 text-white px-6 py-4 rounded-t-xl flex-col items-center">
+          <div className="flex flex-row items-center justify-between">
           <h2 className="text-xl font-semibold">Appointment Details</h2>
           <button
             onClick={onClose}
@@ -32,6 +33,9 @@ export function AppointmentDetailDialog({ appointment, onClose, onCheck }) {
           >
             <X className="w-5 h-5" />
           </button>
+          </div>
+
+          <p className="text-sm text-white">{appointment.AptID}</p>
         </div>
 
         {/* Content */}

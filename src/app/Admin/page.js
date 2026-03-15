@@ -36,7 +36,7 @@ export default function Page() {
 
   return (
     <div className="w-full min-h-screen">
-      <div className="flex-col p-4 flex items-center justify-center w-full gap-5 auto md:flex-row">
+      <div className="flex flex-col md:flex-row p-4 flex items-center justify-center w-full gap-5 auto md:flex-row">
         {/* Search Bar */}
         <div className="flex items-center gap-2 w-auto md:w-auto ">
           <input
@@ -50,40 +50,43 @@ export default function Page() {
 
         {/* Filter Options */}
         <div
-          className="flex flex-row p-4 items-center justify-center w-full gap-4 md:justify-start md:w-auto"
+          className="flex flex-col md:flex-row p-4 items-center justify-center w-full gap-4 md:justify-start md:w-auto"
           id="filter-options"
         >
-          <input
-            type="radio"
-            name="role"
-            id="patients"
-            value="P"
-            checked={searchedRole === "P"}
-            onChange={(e) => setSearchedRole(e.target.value)}
-          />
-          <label for="patients">Patients</label>
+          <div className="flex flex-row gap-4">
+            <input
+              type="radio"
+              name="role"
+              id="patients"
+              value="P"
+              checked={searchedRole === "P"}
+              onChange={(e) => setSearchedRole(e.target.value)}
+            />
+            <label for="patients">Patients</label>
 
-          <input
-            type="radio"
-            name="role"
-            id="doctors"
-            value="D"
-            checked={searchedRole === "D"}
-            onChange={(e) => setSearchedRole(e.target.value)}
-          />
-          <label for="doctors">Doctors</label>
+            <input
+              type="radio"
+              name="role"
+              id="doctors"
+              value="D"
+              checked={searchedRole === "D"}
+              onChange={(e) => setSearchedRole(e.target.value)}
+            />
+            <label for="doctors">Doctors</label>
 
-          <input
-            type="radio"
-            name="role"
-            id="admins"
-            value="A"
-            checked={searchedRole === "A"}
-            onChange={(e) => setSearchedRole(e.target.value)}
-          />
-          <label for="admins">Admins</label>
+            <input
+              type="radio"
+              name="role"
+              id="admins"
+              value="A"
+              checked={searchedRole === "A"}
+              onChange={(e) => setSearchedRole(e.target.value)}
+            />
+            <label for="admins">Admins</label>
+          </div>
 
           <button className="w-[150px] bg-[#4c76b5] text-[#FFFFFF] rounded-[5px] cursor-pointer" onClick={handleClearFilter}>Clear Filters</button>
+          
         </div>
       </div>
 
